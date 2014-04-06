@@ -1,0 +1,6 @@
+<snippet>
+	<content><![CDATA[setInterval($0);]]></content>
+	<tabTrigger>sett</tabTrigger>
+	<scope>source.ts</scope>
+	<description>setInterval(…)</description>
+</snippet>
