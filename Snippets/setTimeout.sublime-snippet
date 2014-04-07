@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[setTimeout($0);]]></content>
-	<tabTrigger>sett</tabTrigger>
+	<tabTrigger>setTimeout</tabTrigger>
 	<scope>source.ts</scope>
 	<description>setTimeout(…)</description>
 </snippet>

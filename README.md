@@ -8,9 +8,10 @@ A [SublimeText](http://www.sublimetext.com/) package for the [TypeScript](http:/
 * Comments & Indentation Preferences
 * Snippets
 
-Main advantage of this plugin is actually working syntax definition.  
+Main advantage of this plugin is actually working syntax definition.
 All other Sublime TypeScript plugins are using same old syntax definition which can't correctly handle
 class methods or variable types.
+I will try to merge my work with other plugins so i hope this statement will not be true for a long time.
 
 
 This plugin does not provide typescript autocomple (performance issues) or
@@ -20,4 +21,4 @@ If you want "heavy IDE" features inside Sublime, look at [T3S](https://github.co
 
 ## Credit
 
-Syntax definition uses parts from Javacirpt JSX definition from Timothy Yung's [repo]([repo](https://github.com/yungsters/sublime).
+Syntax definition uses parts from Javacirpt JSX definition from Timothy Yung's [repo](https://github.com/yungsters/sublime).
