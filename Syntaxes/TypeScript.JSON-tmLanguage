@@ -96,6 +96,14 @@
         "0": { "name": "punctuation.definition.comment.ts" }
       }
     },
+    "comment-block-html": {
+      "name": "comment.block.html.js",
+      "match": "(<!--|-->)",
+      "captures":  {
+        "0": { "name": "punctuation.definition.comment.html.js" },
+        "2": { "name": "punctuation.definition.comment.html.js" }
+      }
+    },
     "comment-line": {
       "name": "comment.line.double-slash.ts",
       "match": "(//).*$\n?",
@@ -108,6 +116,7 @@
       "patterns": [
         { "include": "#comment-block-doc" },
         { "include": "#comment-block" },
+        { "include": "#comment-block-html" },
         { "include": "#comment-line" }
       ]
     },
