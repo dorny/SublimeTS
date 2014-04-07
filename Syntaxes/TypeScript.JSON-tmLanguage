@@ -155,7 +155,7 @@
 
     "module-expression": {
       "name": "meta.module.ts",
-      "begin": "\\b(module)\\b(?:\\s+([a-zA-Z_$]\\w*))?",
+      "begin": "\\b(module)\\b(?:\\s+([a-zA-Z_$][\\w$]*))?",
       "end": "(?=\\})",
       "beginCaptures": {
         "1": { "name": "storage.type.module.ts" },
@@ -171,7 +171,7 @@
 
     "class-expression": {
       "name": "meta.class.ts",
-      "begin": "\\b(class|interface)\\b(?:\\s+([a-zA-Z_$]\\w*))?",
+      "begin": "\\b(class|interface)\\b(?:\\s+([a-zA-Z_$][\\w$]*))?",
       "end": "(?=\\})",
       "beginCaptures": {
         "1": { "name": "storage.type.class.ts" },
@@ -214,7 +214,7 @@
     },
     "meta-class-member-method": {
       "name": "meta.class.member.ts",
-      "begin": "\\b(?:(get|set)\\s+)?([a-zA-Z_$]\\w*)\\s*(?=\\()",
+      "begin": "\\b(?:(get|set)\\s+)?([a-zA-Z_$][\\w$]*)\\s*(?=\\()",
       "end": "(\\})|(;)",
       "beginCaptures": {
         "1": { "name": "storage.type.property.ts" },
@@ -247,7 +247,7 @@
         { "include": "#meta-storage-modifier" },
         {
           "name": "variable.parameter.function.ts",
-          "match": "[a-zA-Z_$]\\w*"
+          "match": "[a-zA-Z_$][\\w$]*"
         },
         { "include": "#meta-variable-type" }
       ]
@@ -266,87 +266,34 @@
         { "include": "#expression" }
       ]
     },
-    "function-on-prototype": {
-      "name": "meta.function.prototype.ts",
-      "comment": "match stuff like: Sound.prototype.play = function() { … }",
-      "begin": "([a-zA-Z_?.$][\\w?.$]*)\\.(prototype)\\.([a-zA-Z_?.$][\\w?.$]*)\\s*(=)\\s*(function)\\b",
-      "end": "\\}",
-      "beginCaptures": {
-        "0": { "name": "meta.function.ts" },
-        "1": { "name": "support.class.ts" },
-        "2": { "name": "support.constant.ts" },
-        "3": { "name": "entity.name.function.ts" },
-        "4": { "name": "keyword.operator.ts" },
-        "5": { "name": "storage.type.function.ts" }
-      },
-      "endCaptures": {
-        "0": { "name": "meta.brace.curly.ts" }
-      },
-      "patterns": [
-        { "include": "#comment" },
-        { "include": "#meta-function-parameters" },
-        { "include": "#meta-function-body" }
-      ]
-    },
-    "function-on-prototype-named": {
-      "name": "meta.scope.function.ts",
-      "comment": "match stuff like: Sound.prototype.play = myfunc",
-      "match": "([a-zA-Z_?.$][\\w?.$]*)\\.(prototype)\\.([a-zA-Z_?.$][\\w?.$]*)\\s*(=)\\s*",
+    "meta-function-assignment": {
+      "match": "\\b([a-zA-Z_$][\\w$]*)\\s*(=|:)\\s*(?=(\\bfunction\\b))",
       "captures": {
-        "0": { "name": "meta.function.ts" },
-        "1": { "name": "support.class.ts" },
-        "2": { "name": "support.constant.ts" },
-        "3": { "name": "entity.name.function.ts" },
-        "4": { "name": "keyword.operator.ts" }
+          "1": { "name": "entity.name.function.ts" },
+          "2": { "name": "keyword.operator.ts" }
       }
     },
-    "function-on-object": {
-      "name": "meta.scope.function.ts",
-      "comment": "match stuff like: Sound.play = function() { … }",
-      "begin": "([a-zA-Z_?.$][\\w?.$]*)\\.([a-zA-Z_?.$][\\w?.$]*)\\s*(=)\\s*(function)\\b",
-      "end": "\\}",
-      "beginCaptures": {
-        "0": { "name": "meta.function.ts" },
-        "1": { "name": "support.class.ts" },
-        "2": { "name": "entity.name.function.ts" },
-        "3": { "name": "keyword.operator.ts" },
-        "4": { "name": "storage.type.function.ts" }
-      },
-      "endCaptures": {
-        "0": { "name": "meta.brace.curly.ts" }
-      },
-      "patterns": [
-        { "include": "#comment" },
-        { "include": "#meta-function-parameters" },
-        { "include": "#meta-function-body" }
-      ]
+
+    "meta-function-assignment-quoted": {
+      "match": "(?:((')([^']*)('))|((\")([^\"]+)(\")))\\s*:\\s*(?=\\bfunction\\b)",
+      "captures": {
+          "1": { "name": "string.quoted.single.ts" },
+          "2": { "name": "punctuation.definition.string.begin.ts" },
+          "3": { "name": "entity.name.function.ts" },
+          "4": { "name": "punctuation.definition.string.end.ts" },
+          "5": { "name": "string.quoted.double.ts" },
+          "6": { "name": "punctuation.definition.string.begin.ts" },
+          "7": { "name": "entity.name.function.ts" },
+          "8": { "name": "punctuation.definition.string.end.ts" }
+      }
     },
-    "function-as-var": {
-      "name": "meta.scope.function.ts",
-      "comment": "match stuff like: play = function() { … }",
-      "begin": "([a-zA-Z_?$][\\w?$]*)\\s*(=)\\s*(function)\\b(?:\\s+([a-zA-Z_$]\\w*))?\\s*",
-      "end": "\\}",
+    "meta-function": {
+      "begin": "\\b(function)(?:\\s+([a-zA-Z_$][\\w$]*))?\\s*",
+      "end": "(\\})|(;)",
       "beginCaptures": {
-        "0": { "name": "meta.function.ts" },
-        "1": { "name": "entity.name.function.ts" },
-        "2": { "name": "keyword.operator.ts" },
-        "3": { "name": "storage.type.function.ts" },
-        "4": { "name": "entity.name.function.ts" }
+        "1": { "name": "storage.type.property.ts" },
+        "2": { "name": "entity.name.function.ts" }
       },
-      "endCaptures": {
-        "0": { "name": "meta.brace.curly.ts" }
-      },
-      "patterns": [
-        { "include": "#comment" },
-        { "include": "#meta-function-parameters" },
-        { "include": "#meta-function-body" }
-      ]
-    },
-    "function-named-expression": {
-      "name": "meta.scope.function.ts",
-      "comment": "match regular function like: function myFunc(arg) { … }",
-      "begin": "\\b(function)\\b(?:\\s+([a-zA-Z_$]\\w*))\\s*",
-      "end": "\\}",
       "beginCaptures": {
         "0": { "name": "meta.function.ts" },
         "1": { "name": "storage.type.function.ts" },
@@ -362,102 +309,14 @@
         { "include": "#misc-higlighting" }
       ]
     },
-    "function-expression": {
-      "name": "meta.scope.function.ts",
-      "comment": "match regular function like: function myFunc(arg) { … }",
-      "begin": "\\b(function)\\b\\s*",
-      "end": "\\}",
-      "beginCaptures": {
-        "1": { "name": "storage.type.function.ts" }
-      },
-      "endCaptures": {
-        "0": { "name": "meta.brace.curly.ts" }
-      },
-      "patterns": [
-        { "include": "#comment" },
-        { "include": "#meta-function-parameters" },
-        { "include": "#meta-function-body" }
-      ]
-    },
-    "function-json": {
-      "name": "meta.scope.function.ts",
-      "comment": "match stuff like: foobar: function() { … }",
-      "begin": "\\b([a-zA-Z_?.$][\\w?.$]*)\\s*:\\s*\\b(function)\\s*",
-      "end": "\\}",
-      "beginCaptures": {
-        "0": { "name": "meta.function.ts" },
-        "1": { "name": "entity.name.function.ts" },
-        "2": { "name": "storage.type.function.ts" }
-      },
-      "endCaptures": {
-        "0": { "name": "meta.brace.curly.ts" }
-      },
-      "patterns": [
-        { "include": "#comment" },
-        { "include": "#meta-function-parameters" },
-        { "include": "#meta-function-body" }
-      ]
-    },
-    "function-json-quoted": {
-      "name": "meta.scope.function.ts",
-      "comment": "Attempt to match 'foo': function",
-      "begin": "(?:((')([^']*)('))|((\")([^\"]+)(\")))\\s*:\\s*\\b(function)\\b",
-      "end": "\\}",
-      "beginCaptures": {
-        "0": { "name": "meta.function.ts" },
-        "1": { "name": "string.quoted.single.ts" },
-        "2": { "name": "punctuation.definition.string.begin.ts" },
-        "3": { "name": "entity.name.function.ts" },
-        "4": { "name": "punctuation.definition.string.end.ts" },
-        "5": { "name": "string.quoted.double.ts" },
-        "6": { "name": "punctuation.definition.string.begin.ts" },
-        "7": { "name": "entity.name.function.ts" },
-        "8": { "name": "punctuation.definition.string.end.ts" },
-        "9": { "name": "storage.type.function.ts" }
-      },
-      "endCaptures": {
-        "0": { "name": "meta.brace.curly.ts" }
-      },
-      "patterns": [
-        { "include": "#comment" },
-        { "include": "#meta-function-parameters" },
-        { "include": "#meta-function-body" }
-      ]
-    },
-    "function-property": {
-      "name": "meta.property.tson.ts",
-      "begin": "\\b(get|set)\\s+([a-zA-Z_$]\\w*)\\b",
-      "end": "\\}",
-      "beginCaptures": {
-        "0": { "name": "meta.function.ts" },
-        "1": { "name": "storage.type.property.ts" },
-        "2": { "name": "entity.name.function.ts" }
-      },
-      "endCaptures": {
-        "0": { "name": "meta.brace.curly.ts" }
-      },
-      "patterns": [
-        { "include": "#comment" },
-        { "include": "#meta-function-parameters" },
-        { "include": "#meta-function-body" }
-      ]
-    },
     "function": {
-      "comment": "Function aggregate",
       "name": "meta.function.ts",
       "patterns": [
-        { "include": "#function-on-prototype" },
-        { "include": "#function-on-prototype-named" },
-        { "include": "#function-on-object" },
-        { "include": "#function-as-var" },
-        { "include": "#function-json" },
-        { "include": "#function-json-quoted" },
-        { "include": "#function-property" },
-        { "include": "#function-named-expression" },
-        { "include": "#function-expression" }
+        { "include": "#meta-function-assignment" },
+        { "include": "#meta-function-assignment-quoted" },
+        { "include": "#meta-function" }
       ]
     },
-
 
 
     "misc-higlighting": {
@@ -466,7 +325,7 @@
       "patterns": [
         {
           "name": "meta.class.instance.constructor",
-          "match": "(new)\\s+(\\w+(?:\\.\\w*)*)",
+          "match": "(new)\\s+(\\w+(?:\\.[\\w$]*)*)",
           "captures": {
             "1": { "name": "keyword.operator.new.ts" },
             "2": { "name": "entity.name.type.instance.ts" }
