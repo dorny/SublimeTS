@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>name</key>
-    <string>Comments</string>
+    <string>TypeScript Comments</string>
     <key>scope</key>
     <string>source.ts</string>
     <key>settings</key>

@@ -162,10 +162,6 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#comment-block-html</string>
-				</dict>
-				<dict>
-					<key>include</key>
 					<string>#comment-line</string>
 				</dict>
 			</array>

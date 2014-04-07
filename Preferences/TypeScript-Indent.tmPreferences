@@ -2,25 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>name</key>
-	<string>TypeScript Indent</string>
-	<key>scope</key>
-	<string>source.ts</string>
-	<key>settings</key>
-	<dict>
-		<key>decreaseIndentPattern</key>
-		<string>^(.*\*/)?\s*\}.*$</string>
-		<key>increaseIndentPattern</key>
-		<string>^.*\{[^}"']*$</string>
+    <key>name</key>
+    <string>TypeScript Indent</string>
+    <key>scope</key>
+    <string>source.ts</string>
+    <key>settings</key>
+    <dict>
+        <key>decreaseIndentPattern</key>
+        <string>^(.*\*/)?\s*\}.*$</string>
+        <key>increaseIndentPattern</key>
+        <string>^.*\{[^}"']*$</string>
 
-		<key>bracketIndentNextLinePattern</key>
-		<string>(?x)
-		^ \s* \b(if|while|else)\b [^;]* $
-		| ^ \s* \b(for)\b .* $
-		</string>
+        <key>bracketIndentNextLinePattern</key>
+        <string>(?x)
+        ^ \s* \b(if|while|else)\b [^;]* $
+        | ^ \s* \b(for)\b .* $
+        </string>
 
-	</dict>
-	<key>uuid</key>
-	<string>f1bd1078-2851-42e3-9919-6c5eb63813ee</string>
+    </dict>
+    <key>uuid</key>
+    <string>f1bd1078-2851-42e3-9919-6c5eb63813ee</string>
 </dict>
 </plist>
