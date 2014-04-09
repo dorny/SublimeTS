@@ -321,7 +321,6 @@
           "2": { "name": "keyword.operator.ts" }
       }
     },
-
     "meta-function-assignment-quoted": {
       "match": "(?:((')([^']*)('))|((\")([^\"]+)(\")))\\s*:\\s*(?=\\bfunction\\b)",
       "captures": {
@@ -338,10 +337,6 @@
     "meta-function": {
       "begin": "\\b(function)(?:\\s+([a-zA-Z_$][\\w$]*))?\\s*",
       "end": "(\\})|(;)",
-      "beginCaptures": {
-        "1": { "name": "storage.type.property.ts" },
-        "2": { "name": "entity.name.function.ts" }
-      },
       "beginCaptures": {
         "0": { "name": "meta.function.ts" },
         "1": { "name": "storage.type.function.ts" },
